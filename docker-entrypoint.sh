@@ -3,6 +3,7 @@ set -e
 [[ $DEBUG ]] && set -x 
 # make cluster with config file
 if [[ ${SERVICE_POD_NUM} -gt 1 ]];then
+    export RABBITMQ_NODENAME=rabbit@${HOSTNAME}.${HOSTNAME%-*}
     [ ! -f /opt/rabbitmq/etc/rabbitmq/rabbit.conf ] && touch /opt/rabbitmq/etc/rabbitmq/rabbit.conf
     chown rabbitmq:rabbitmq /opt/rabbitmq/etc/rabbitmq/rabbit.conf
     echo 'cluster_formation.peer_discovery_backend = rabbit_peer_discovery_classic_config' > /opt/rabbitmq/etc/rabbitmq/rabbit.conf
