@@ -15,6 +15,6 @@ if [[ ${SERVICE_POD_NUM} -gt 1 ]];then
 fi
 # debug mode
 [[ $PAUSE ]] && sleep $PAUSE
-# exec followwing CMD
-exec "$@"
+# exec official shell
+docker-entrypoint.sh rabbitmq-server
   
