@@ -3,7 +3,7 @@ set -e
 # add debug mode 
 [[ $DEBUG ]] && set -x
 # format the nodename of rabbit instance
-export RABBITMQ_NODENAME=rabbit@${HOSTNAME}.${HOSTNAME%-*}.${TENANT_ID}.svc.cluster.local.
+#export RABBITMQ_NODENAME=rabbit@${HOSTNAME}.${HOSTNAME%-*}.${TENANT_ID}.svc.cluster.local.
 # make cluster with config file
 if [[ ${SERVICE_POD_NUM} -gt 1 ]];then
     touch /opt/rabbitmq/etc/rabbitmq/rabbit.conf
