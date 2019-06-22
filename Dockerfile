@@ -1,9 +1,10 @@
 FROM rabbitmq:3.7.15-management-alpine
 COPY rabbit.conf /opt/rabbitmq/etc/rabbitmq/rabbit.conf
 
-COPY start.sh /start.sh
+COPY mkcluster.sh /usr/local/bin/mkcluster.sh
 
-RUN chmod +x /start.sh
+RUN chmod +x /usr/local/bin/mkcluster.sh && \
+  sed -i "1a[ $SERVICE_POD_NUM ] && . /usr/local/bin/mkcluster.sh" /usr/local/bin/docker-entrypoint.sh
 
 
 EXPOSE 4369 5671 5672 25672
@@ -18,8 +19,5 @@ ENV RABBITMQ_CONFIG_FILE=/opt/rabbitmq/etc/rabbitmq/rabbit
 ENV RABBITMQ_ERLANG_COOKIE=rabbitcookie
 ENV RABBITMQ_VERSION=3.7.15
 ENV TZ=Asia/Shanghai
-
-
-ENTRYPOINT ["/start.sh"]
 
 
