@@ -17,7 +17,7 @@ ENV RABBITMQ_DEFAULT_VHOST=my_vhost
 ENV RABBITMQ_CONFIG_FILE=/opt/rabbitmq/etc/rabbitmq/rabbit
 ENV RABBITMQ_ERLANG_COOKIE=rabbitcookie
 ENV RABBITMQ_VERSION=3.7.15
-ENV TZ=	Asia/Shanghai
+ENV TZ=Asia/Shanghai
 
 
 ENTRYPOINT ["/start.sh"]
