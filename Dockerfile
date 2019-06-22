@@ -4,7 +4,7 @@ COPY rabbit.conf /opt/rabbitmq/etc/rabbitmq/rabbit.conf
 COPY mkcluster.sh /usr/local/bin/mkcluster.sh
 
 RUN chmod +x /usr/local/bin/mkcluster.sh && \
-  sed -i "1a[ $SERVICE_POD_NUM ] && . /usr/local/bin/mkcluster.sh" /usr/local/bin/docker-entrypoint.sh
+  sed -i '1a[ $SERVICE_POD_NUM ] && . /usr/local/bin/mkcluster.sh' /usr/local/bin/docker-entrypoint.sh
 
 
 EXPOSE 4369 5671 5672 25672
