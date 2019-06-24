@@ -1,6 +1,7 @@
 FROM rabbitmq:3.7.15-management-alpine
-COPY rabbit.conf /opt/rabbitmq/etc/rabbitmq/rabbit.conf
-
+#COPY rabbit.conf /opt/rabbitmq/etc/rabbitmq/rabbit.conf
+RUN echo "http://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories \
+    && apk add --no-cahce tzdata
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh

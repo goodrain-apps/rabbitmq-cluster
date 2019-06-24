@@ -2,18 +2,18 @@
 set -e
 [[ $DEBUG ]] && set -x 
 # make cluster with config file
-if [[ ${SERVICE_POD_NUM} -gt 1 ]];then
-    export RABBITMQ_NODENAME=rabbit@${HOSTNAME}.${HOSTNAME%-*}
-    [ ! -f /opt/rabbitmq/etc/rabbitmq/rabbit.conf ] && touch /opt/rabbitmq/etc/rabbitmq/rabbit.conf
-    chown rabbitmq:rabbitmq /opt/rabbitmq/etc/rabbitmq/rabbit.conf
-    echo 'cluster_formation.peer_discovery_backend = rabbit_peer_discovery_classic_config' > /opt/rabbitmq/etc/rabbitmq/rabbit.conf
-    for i in $(seq ${SERVICE_POD_NUM})
-      do
-        echo "discover the member of rabbit cluster : rabbit@${HOSTNAME%-*}-`expr $i - 1`.${HOSTNAME%-*}.${TENANT_ID}.svc.cluster.local."
-        #echo "cluster_formation.classic_config.nodes.$i = rabbit@${HOSTNAME%-*}-`expr $i - 1`.${HOSTNAME%-*}.${TENANT_ID}.svc.cluster.local." >> /opt/rabbitmq/etc/rabbitmq/rabbit.conf
-        echo "cluster_formation.classic_config.nodes.$i = rabbit@${HOSTNAME%-*}-`expr $i - 1`.${HOSTNAME%-*}" >> /opt/rabbitmq/etc/rabbitmq/rabbit.conf
-      done
-fi
+# if [[ ${SERVICE_POD_NUM} -gt 1 ]];then
+#     export RABBITMQ_NODENAME=rabbit@${HOSTNAME}.${HOSTNAME%-*}
+#     [ ! -f /opt/rabbitmq/etc/rabbitmq/rabbit.conf ] && touch /opt/rabbitmq/etc/rabbitmq/rabbit.conf
+#     chown rabbitmq:rabbitmq /opt/rabbitmq/etc/rabbitmq/rabbit.conf
+#     echo 'cluster_formation.peer_discovery_backend = rabbit_peer_discovery_classic_config' > /opt/rabbitmq/etc/rabbitmq/rabbit.conf
+#     for i in $(seq ${SERVICE_POD_NUM})
+#       do
+#         echo "discover the member of rabbit cluster : rabbit@${HOSTNAME%-*}-`expr $i - 1`.${HOSTNAME%-*}.${TENANT_ID}.svc.cluster.local."
+#         #echo "cluster_formation.classic_config.nodes.$i = rabbit@${HOSTNAME%-*}-`expr $i - 1`.${HOSTNAME%-*}.${TENANT_ID}.svc.cluster.local." >> /opt/rabbitmq/etc/rabbitmq/rabbit.conf
+#         echo "cluster_formation.classic_config.nodes.$i = rabbit@${HOSTNAME%-*}-`expr $i - 1`.${HOSTNAME%-*}" >> /opt/rabbitmq/etc/rabbitmq/rabbit.conf
+#       done
+# fi
 
 # usage: file_env VAR [DEFAULT]
 #    ie: file_env 'XYZ_DB_PASSWORD' 'example'
