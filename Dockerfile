@@ -6,7 +6,7 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 4369 5671 5672 25672
+EXPOSE 4369 5671 5672 25672 15672
 
 VOLUME [ "/var/lib/rabbitmq" ]
 
